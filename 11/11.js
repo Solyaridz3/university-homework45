@@ -1,9 +1,12 @@
-import fs from "fs";
+import fs from "fs/promises";
 
-fs.readFile("data/non_existent_file.txt", "utf8", (err, data) => {
-  if (err) {
+async function readFile() {
+  try {
+    const data = await fs.readFile("data/non_existent_file.txt", "utf8");
+    console.log(data);
+  } catch (err) {
     console.error("Файл не існує!");
-    return;
   }
-  console.log(data);
-});
+}
+
+readFile();

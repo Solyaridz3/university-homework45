@@ -1,10 +1,13 @@
-import fs from "fs";
+import fs from "fs/promises";
 
-fs.readFile('data/number.txt', 'utf8', (err, data) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
+async function readAndSquareNumber() {
+  try {
+    const data = await fs.readFile("data/number.txt", "utf8");
     const number = parseInt(data, 10);
     console.log(`Квадрат числа: ${number * number}`);
-});
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+readAndSquareNumber();

@@ -1,14 +1,14 @@
-import fs from "fs";
+import fs from 'fs/promises';
 
-fs.readFile("data/number.txt", "utf8", (err, data) => {
-  if (err) {
+async function readAndSquareNumber() {
+  try {
+    const data = await fs.readFile('data/number.txt', 'utf8');
+    const number = parseInt(data, 10);
+    await fs.writeFile('data/number.txt', (number * number).toString());
+    console.log('Число успішно піднесено до квадрату та записано у файл');
+  } catch (err) {
     console.error(err);
-    return;
   }
-  const number = parseInt(data, 10);
-  fs.writeFile("data/number.txt", (number * number).toString(), (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
-});
+}
+
+readAndSquareNumber();

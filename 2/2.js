@@ -1,11 +1,9 @@
-import fs from "fs";
+import fs from "fs/promises";
 
-fs.readFile("data/number.txt", "utf8", (err, data) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  console.log(data);
-});
+function readFile() {
+  const data = fs.readFile("data/number.txt", "utf8");
+  data.then(console.log).catch((err) => console.error(err));
+  console.log("Цей код буде виконано раніше, ніж файл буде прочитано");
+}
 
-console.log("Цей код буде виконано раніше, ніж файл буде прочитано");
+readFile();
